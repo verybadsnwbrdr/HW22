@@ -60,16 +60,72 @@
 		3ADE34E12920DC8900953336 /* HW22 */ = {
 			isa = PBXGroup;
 			children = (
-				3ADE34E22920DC8900953336 /* AppDelegate.swift */,
-				3ADE34E42920DC8900953336 /* SceneDelegate.swift */,
-				3ADE34E62920DC8900953336 /* ViewController.swift */,
-				3ADE34E82920DC8900953336 /* Main.storyboard */,
-				3ADE34EE2920DC8B00953336 /* Assets.xcassets */,
-				3ADE34F02920DC8B00953336 /* LaunchScreen.storyboard */,
-				3ADE34F32920DC8B00953336 /* Info.plist */,
-				3ADE34EB2920DC8900953336 /* HW22.xcdatamodeld */,
+				3ADE34FD2920E09E00953336 /* Sources */,
+				3ADE34FC2920E09400953336 /* Resources */,
 			);
 			path = HW22;
+			sourceTree = "<group>";
+		};
+		3ADE34FC2920E09400953336 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE35022920E0E800953336 /* CoreData */,
+				3ADE34FF2920E0B300953336 /* Storyboards */,
+				3ADE34FE2920E0A600953336 /* Configs */,
+				3ADE34EE2920DC8B00953336 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3ADE34FD2920E09E00953336 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE35012920E0C100953336 /* Scenes */,
+				3ADE35002920E0BC00953336 /* App */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		3ADE34FE2920E0A600953336 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE34F32920DC8B00953336 /* Info.plist */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		3ADE34FF2920E0B300953336 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE34E82920DC8900953336 /* Main.storyboard */,
+				3ADE34F02920DC8B00953336 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3ADE35002920E0BC00953336 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE34E22920DC8900953336 /* AppDelegate.swift */,
+				3ADE34E42920DC8900953336 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		3ADE35012920E0C100953336 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE34E62920DC8900953336 /* ViewController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		3ADE35022920E0E800953336 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE34EB2920DC8900953336 /* HW22.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,7 +357,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XPDQ86R58G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HW22/Info.plist;
+				INFOPLIST_FILE = HW22/Resources/Configs/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -329,7 +385,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XPDQ86R58G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HW22/Info.plist;
+				INFOPLIST_FILE = HW22/Resources/Configs/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
