@@ -19,6 +19,8 @@
 		3ADE350A2920E95B00953336 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35092920E95B00953336 /* ProfileViewController.swift */; };
 		3ADE350C2920E96A00953336 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350B2920E96A00953336 /* ProfilePresenter.swift */; };
 		3ADE350E2920E97500953336 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350D2920E97500953336 /* ProfileModel.swift */; };
+		3ADE35102920F36300953336 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350F2920F36300953336 /* MainTableViewCell.swift */; };
+		3ADE35142920F9CE00953336 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35132920F9CE00953336 /* ModuleBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		3ADE35092920E95B00953336 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3ADE350B2920E96A00953336 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		3ADE350D2920E97500953336 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		3ADE350F2920F36300953336 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		3ADE35132920F9CE00953336 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 		3ADE35012920E0C100953336 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3ADE35122920F9B100953336 /* Builder */,
 				3ADE35042920E90C00953336 /* ProfileScreen */,
 				3ADE35032920E8FE00953336 /* MainScreen */,
 			);
@@ -139,6 +144,7 @@
 		3ADE35032920E8FE00953336 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				3ADE35112920F43E00953336 /* TableViewCell */,
 				3ADE34E62920DC8900953336 /* MainViewController.swift */,
 				3ADE35052920E93900953336 /* MainPresenter.swift */,
 				3ADE35072920E94200953336 /* MainModel.swift */,
@@ -154,6 +160,22 @@
 				3ADE350D2920E97500953336 /* ProfileModel.swift */,
 			);
 			path = ProfileScreen;
+			sourceTree = "<group>";
+		};
+		3ADE35112920F43E00953336 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE350F2920F36300953336 /* MainTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		3ADE35122920F9B100953336 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE35132920F9CE00953336 /* ModuleBuilder.swift */,
+			);
+			path = Builder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +258,8 @@
 				3ADE35062920E93900953336 /* MainPresenter.swift in Sources */,
 				3ADE34ED2920DC8900953336 /* HW22.xcdatamodeld in Sources */,
 				3ADE350C2920E96A00953336 /* ProfilePresenter.swift in Sources */,
+				3ADE35142920F9CE00953336 /* ModuleBuilder.swift in Sources */,
+				3ADE35102920F36300953336 /* MainTableViewCell.swift in Sources */,
 				3ADE35082920E94200953336 /* MainModel.swift in Sources */,
 				3ADE34E72920DC8900953336 /* MainViewController.swift in Sources */,
 				3ADE350A2920E95B00953336 /* ProfileViewController.swift in Sources */,

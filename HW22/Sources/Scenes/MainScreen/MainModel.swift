@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct MainModel {
+    var persons: [Person] = []
+}
+
+struct Person {
+    let name: String
+    let age: Int?
+}
