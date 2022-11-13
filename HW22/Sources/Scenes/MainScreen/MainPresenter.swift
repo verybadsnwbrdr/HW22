@@ -6,3 +6,23 @@
 //
 
 import Foundation
+
+protocol MainPresenterProtocol: AnyObject {
+    init(view: MainViewProtocol, model: MainModel)
+}
+
+class MainPresenter: MainPresenterProtocol {
+    
+    // MARK: - References
+    
+    weak var view: MainViewProtocol?
+    private let model: MainModel
+    
+    // MARK: - Initializer
+    
+    required init(view: MainViewProtocol, model: MainModel) {
+        self.view = view
+        self.model = model
+    }
+    
+}

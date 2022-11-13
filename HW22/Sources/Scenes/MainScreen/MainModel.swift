@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct MainModel {
+    let name: String
+}
