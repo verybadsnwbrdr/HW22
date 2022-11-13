@@ -32,11 +32,12 @@ class MainViewController: UIViewController, MainViewProtocol {
     
     private lazy var button: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Button", for: .normal)
+        button.setTitle("Add User", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.tintColor = .white
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(addPerson), for: .touchUpInside)
         return button
     }()
     
@@ -87,18 +88,31 @@ class MainViewController: UIViewController, MainViewProtocol {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(button.snp.bottom).offset(20)
-            make.bottom.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.snp.bottom)
         }
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func addPerson() {
+        guard let text = textField.text else { return }
+        presenter?.addPerson(name: text)
+        tableView.reloadData()
     }
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        presenter?.numberOfElements() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell,
+              let person = presenter?.getName(for: indexPath.row) else { return UITableViewCell() }
+        
+        cell.setupCell(with: person)
+        
         return cell
     }
 }

@@ -13,7 +13,7 @@ protocol ModuleBuilderProtocol {
 
 class ModuleBuilder: ModuleBuilderProtocol {
     static func createMain() -> UIViewController {
-        let model = MainModel(name: "test")
+        let model = MainModel()
         let view = MainViewController()
         let presenter = MainPresenter(view: view, model: model)
         view.presenter = presenter
