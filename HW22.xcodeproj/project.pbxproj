@@ -14,6 +14,7 @@
 		3ADE34ED2920DC8900953336 /* HW22.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE34EB2920DC8900953336 /* HW22.xcdatamodeld */; };
 		3ADE34EF2920DC8B00953336 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ADE34EE2920DC8B00953336 /* Assets.xcassets */; };
 		3ADE34F22920DC8B00953336 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ADE34F02920DC8B00953336 /* LaunchScreen.storyboard */; };
+		3ADE34FB2920DD8D00953336 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3ADE34FA2920DD8D00953336 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ADE34FB2920DD8D00953336 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +88,9 @@
 			dependencies = (
 			);
 			name = HW22;
+			packageProductDependencies = (
+				3ADE34FA2920DD8D00953336 /* SnapKit */,
+			);
 			productName = HW22;
 			productReference = 3ADE34DF2920DC8900953336 /* HW22.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +119,9 @@
 				Base,
 			);
 			mainGroup = 3ADE34D62920DC8900953336;
+			packageReferences = (
+				3ADE34F92920DD8C00953336 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 3ADE34E02920DC8900953336 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -362,6 +370,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3ADE34F92920DD8C00953336 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3ADE34FA2920DD8D00953336 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3ADE34F92920DD8C00953336 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		3ADE34EB2920DC8900953336 /* HW22.xcdatamodeld */ = {
