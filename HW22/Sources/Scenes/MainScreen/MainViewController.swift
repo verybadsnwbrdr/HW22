@@ -115,4 +115,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        presenter?.deletePerson(at: indexPath.row)
+        tableView.reloadData()
+    }
 }

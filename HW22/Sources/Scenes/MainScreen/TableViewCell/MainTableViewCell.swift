@@ -53,4 +53,11 @@ class MainTableViewCell: UITableViewCell {
             make.centerY.equalTo(snp.centerY)
         }
     }
+    
+    // MARK: - PrepareForReuse
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        label.text = nil
+    }
 }

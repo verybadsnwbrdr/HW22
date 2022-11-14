@@ -6,13 +6,16 @@
 //
 
 import Foundation
+import CoreData
+//import UIKit
 
 protocol MainPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, model: MainModel)
+    init(view: MainViewProtocol, model: ManagedModelProtocol)
     
     func numberOfElements() -> Int
     func getName(for row: Int) -> Person
     func addPerson(name: String)
+    func deletePerson(at row: Int)
 }
 
 class MainPresenter: MainPresenterProtocol {
@@ -20,7 +23,7 @@ class MainPresenter: MainPresenterProtocol {
     // MARK: - References
     
     weak var view: MainViewProtocol?
-    private var model: MainModel
+    private var model: ManagedModelProtocol
     
     // MARK: - Properties
     
@@ -28,7 +31,7 @@ class MainPresenter: MainPresenterProtocol {
     
     // MARK: - Initializer
     
-    required init(view: MainViewProtocol, model: MainModel) {
+    required init(view: MainViewProtocol, model: ManagedModelProtocol) {
         self.view = view
         self.model = model
     }
@@ -36,15 +39,19 @@ class MainPresenter: MainPresenterProtocol {
     // MARK: - Methods
     
     func numberOfElements() -> Int {
-        model.persons.count
+        model.getModels().count
     }
     
     func getName(for row: Int) -> Person {
-        model.persons[row]
+        model.getModels()[row]
     }
     
     func addPerson(name: String) {
-        let person = Person(name: name, age: nil)
-        model.persons.append(person)
+        model.managedObject.name = name
+        model.saveContext()
+    }
+    
+    func deletePerson(at row: Int) {
+        model.deleteContext(at: row)
     }
 }
