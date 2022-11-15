@@ -13,7 +13,7 @@ protocol ManagedModelProtocol: AnyObject {
     
     func saveContext()
     func getModels() -> [Person]
-    func deleteContext(at row: Int)
+    func deleteFromContext(person: Person)
 }
 
 final class ManagedModel: ManagedModelProtocol {
@@ -53,19 +53,17 @@ final class ManagedModel: ManagedModelProtocol {
     // MARK: - CoreData
     
     func saveContext() {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+        guard context.hasChanges else { return }
+        do {
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
-    func deleteContext(at row: Int) {
-        let model = getModels()[row]
-        context.delete(model)
+    func deleteFromContext(person: Person) {
+        context.delete(person)
         saveContext()
     }
     

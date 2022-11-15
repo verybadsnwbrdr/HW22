@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A00422C2923CAF300C8A125 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00422B2923CAF300C8A125 /* Router.swift */; };
 		3ADE34E32920DC8900953336 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE34E22920DC8900953336 /* AppDelegate.swift */; };
 		3ADE34E52920DC8900953336 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE34E42920DC8900953336 /* SceneDelegate.swift */; };
 		3ADE34E72920DC8900953336 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE34E62920DC8900953336 /* MainViewController.swift */; };
@@ -15,17 +16,18 @@
 		3ADE34F22920DC8B00953336 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ADE34F02920DC8B00953336 /* LaunchScreen.storyboard */; };
 		3ADE34FB2920DD8D00953336 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3ADE34FA2920DD8D00953336 /* SnapKit */; };
 		3ADE35062920E93900953336 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35052920E93900953336 /* MainPresenter.swift */; };
-		3ADE35082920E94200953336 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35072920E94200953336 /* MainModel.swift */; };
+		3ADE35082920E94200953336 /* ManagedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35072920E94200953336 /* ManagedModel.swift */; };
 		3ADE350A2920E95B00953336 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35092920E95B00953336 /* ProfileViewController.swift */; };
 		3ADE350C2920E96A00953336 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350B2920E96A00953336 /* ProfilePresenter.swift */; };
 		3ADE350E2920E97500953336 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350D2920E97500953336 /* ProfileModel.swift */; };
 		3ADE35102920F36300953336 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350F2920F36300953336 /* MainTableViewCell.swift */; };
-		3ADE35142920F9CE00953336 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35132920F9CE00953336 /* ModuleBuilder.swift */; };
+		3ADE35142920F9CE00953336 /* AssemblyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35132920F9CE00953336 /* AssemblyBuilder.swift */; };
 		3ADE353A292284DA00953336 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE3538292284DA00953336 /* Person+CoreDataClass.swift */; };
 		3ADE353B292284DA00953336 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE3539292284DA00953336 /* Person+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A00422B2923CAF300C8A125 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		3ADE34DF2920DC8900953336 /* HW22.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HW22.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ADE34E22920DC8900953336 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3ADE34E42920DC8900953336 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,12 +37,12 @@
 		3ADE34F12920DC8B00953336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3ADE34F32920DC8B00953336 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3ADE35052920E93900953336 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
-		3ADE35072920E94200953336 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		3ADE35072920E94200953336 /* ManagedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedModel.swift; sourceTree = "<group>"; };
 		3ADE35092920E95B00953336 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3ADE350B2920E96A00953336 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		3ADE350D2920E97500953336 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		3ADE350F2920F36300953336 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		3ADE35132920F9CE00953336 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
+		3ADE35132920F9CE00953336 /* AssemblyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyBuilder.swift; sourceTree = "<group>"; };
 		3ADE3538292284DA00953336 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3ADE3539292284DA00953336 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,7 +154,6 @@
 				3ADE35112920F43E00953336 /* TableViewCell */,
 				3ADE34E62920DC8900953336 /* MainViewController.swift */,
 				3ADE35052920E93900953336 /* MainPresenter.swift */,
-				3ADE35072920E94200953336 /* MainModel.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -178,7 +179,8 @@
 		3ADE35122920F9B100953336 /* Builder */ = {
 			isa = PBXGroup;
 			children = (
-				3ADE35132920F9CE00953336 /* ModuleBuilder.swift */,
+				3ADE35132920F9CE00953336 /* AssemblyBuilder.swift */,
+				3A00422B2923CAF300C8A125 /* Router.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -188,6 +190,7 @@
 			children = (
 				3ADE3538292284DA00953336 /* Person+CoreDataClass.swift */,
 				3ADE3539292284DA00953336 /* Person+CoreDataProperties.swift */,
+				3ADE35072920E94200953336 /* ManagedModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -272,12 +275,13 @@
 				3ADE35062920E93900953336 /* MainPresenter.swift in Sources */,
 				3ADE34ED2920DC8900953336 /* CoreData.xcdatamodeld in Sources */,
 				3ADE350C2920E96A00953336 /* ProfilePresenter.swift in Sources */,
-				3ADE35142920F9CE00953336 /* ModuleBuilder.swift in Sources */,
+				3ADE35142920F9CE00953336 /* AssemblyBuilder.swift in Sources */,
 				3ADE35102920F36300953336 /* MainTableViewCell.swift in Sources */,
-				3ADE35082920E94200953336 /* MainModel.swift in Sources */,
+				3ADE35082920E94200953336 /* ManagedModel.swift in Sources */,
 				3ADE34E72920DC8900953336 /* MainViewController.swift in Sources */,
 				3ADE353A292284DA00953336 /* Person+CoreDataClass.swift in Sources */,
 				3ADE350A2920E95B00953336 /* ProfileViewController.swift in Sources */,
+				3A00422C2923CAF300C8A125 /* Router.swift in Sources */,
 				3ADE353B292284DA00953336 /* Person+CoreDataProperties.swift in Sources */,
 				3ADE34E32920DC8900953336 /* AppDelegate.swift in Sources */,
 				3ADE34E52920DC8900953336 /* SceneDelegate.swift in Sources */,

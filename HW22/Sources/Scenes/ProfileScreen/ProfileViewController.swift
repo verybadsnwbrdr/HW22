@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 
-class ProfileViewController: UIViewController {
+protocol ProfileViewProtocol: AnyObject {
+    
+}
+
+class ProfileViewController: UIViewController, ProfileViewProtocol {
     
     // MARK: - Elements
+    
+    
     
     // MARK: - Lifecycle
     

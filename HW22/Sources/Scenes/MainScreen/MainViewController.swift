@@ -108,11 +108,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell,
-              let person = presenter?.getName(for: indexPath.row) else { return UITableViewCell() }
-        
-        cell.setupCell(with: person)
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        if let person = presenter?.getPerson(for: indexPath.row) {
+            cell.setupCell(with: person)
+        }
         return cell
     }
     
@@ -121,4 +120,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         presenter?.deletePerson(at: indexPath.row)
         tableView.reloadData()
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
 }

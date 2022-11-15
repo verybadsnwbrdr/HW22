@@ -10,12 +10,14 @@ import CoreData
 //import UIKit
 
 protocol MainPresenterProtocol: AnyObject {
-    init(view: MainViewProtocol, model: ManagedModelProtocol)
+    init(view: MainViewProtocol, model: ManagedModelProtocol, router: RouterProtocol)
     
-    func numberOfElements() -> Int
-    func getName(for row: Int) -> Person
-    func addPerson(name: String)
+    func getPersons() -> [Person]
     func deletePerson(at row: Int)
+    
+    func addPerson(name: String)
+    func numberOfElements() -> Int
+    func getPerson(for row: Int) -> Person
 }
 
 class MainPresenter: MainPresenterProtocol {
@@ -23,35 +25,49 @@ class MainPresenter: MainPresenterProtocol {
     // MARK: - References
     
     weak var view: MainViewProtocol?
+    var router: RouterProtocol?
     private var model: ManagedModelProtocol
     
     // MARK: - Properties
     
-    private var names: [String] = []
+    private var persons: [Person] = []
     
     // MARK: - Initializer
     
-    required init(view: MainViewProtocol, model: ManagedModelProtocol) {
+    required init(view: MainViewProtocol,
+                  model: ManagedModelProtocol,
+                  router: RouterProtocol) {
         self.view = view
         self.model = model
+        self.router = router
+        
+        persons = getPersons()
     }
     
-    // MARK: - Methods
+    // MARK: - Methods for Model
     
-    func numberOfElements() -> Int {
-        model.getModels().count
+    func getPersons() -> [Person] {
+        model.getModels()
     }
     
-    func getName(for row: Int) -> Person {
-        model.getModels()[row]
+    func deletePerson(at row: Int) {
+        let person = persons.remove(at: row)
+        model.deleteFromContext(person: person)
     }
+    
+    // MARK: - Methods for ViewController
     
     func addPerson(name: String) {
         model.managedObject.name = name
         model.saveContext()
+        persons = getPersons()
     }
     
-    func deletePerson(at row: Int) {
-        model.deleteContext(at: row)
+    func numberOfElements() -> Int {
+        persons.count
+    }
+    
+    func getPerson(for row: Int) -> Person {
+        persons[row]
     }
 }
