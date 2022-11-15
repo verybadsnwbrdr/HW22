@@ -98,6 +98,7 @@ class MainViewController: UIViewController, MainViewProtocol {
     @objc private func addPerson() {
         guard let text = textField.text else { return }
         presenter?.addPerson(name: text)
+        textField.text = nil
         tableView.reloadData()
     }
 }
@@ -108,11 +109,21 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell,
-              let person = presenter?.getName(for: indexPath.row) else { return UITableViewCell() }
-        
-        cell.setupCell(with: person)
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        if let person = presenter?.getPerson(for: indexPath.row) {
+            cell.setupCell(with: person)
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        presenter?.deletePerson(at: indexPath.row)
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.tapFor(row: indexPath.row)
     }
 }
