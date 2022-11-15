@@ -12,7 +12,7 @@ protocol RouterProtocol {
     var assemblyBuilder: AssemblyBuilderProtocol? { get set }
     
     func initialViewController()
-    func showProfileScreen()
+    func showProfileScreen(person: Person)
     func popToRoot()
 }
 
@@ -32,10 +32,10 @@ class Router: RouterProtocol {
         navigationController.viewControllers = [mainViewController]
     }
     
-    func showProfileScreen() {
+    func showProfileScreen(person: Person) {
         guard let navigationController = navigationController,
-              let mainViewController = assemblyBuilder?.createMainModule(router:  self) else { return }
-        navigationController.pushViewController(mainViewController, animated: true)
+              let profileViewController = assemblyBuilder?.createProfileModule(router:  self, person: person) else { return }
+        navigationController.pushViewController(profileViewController, animated: true)
     }
     
     func popToRoot() {

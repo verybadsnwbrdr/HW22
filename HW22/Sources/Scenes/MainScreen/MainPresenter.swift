@@ -18,6 +18,8 @@ protocol MainPresenterProtocol: AnyObject {
     func addPerson(name: String)
     func numberOfElements() -> Int
     func getPerson(for row: Int) -> Person
+    
+    func tapFor(row: Int)
 }
 
 class MainPresenter: MainPresenterProtocol {
@@ -69,5 +71,12 @@ class MainPresenter: MainPresenterProtocol {
     
     func getPerson(for row: Int) -> Person {
         persons[row]
+    }
+    
+    // MARK: - Methods for Navigation
+    
+    func tapFor(row: Int) {
+        let person = persons[row]
+        router?.showProfileScreen(person: person)
     }
 }

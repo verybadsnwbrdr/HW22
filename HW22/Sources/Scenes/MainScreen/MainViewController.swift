@@ -98,6 +98,7 @@ class MainViewController: UIViewController, MainViewProtocol {
     @objc private func addPerson() {
         guard let text = textField.text else { return }
         presenter?.addPerson(name: text)
+        textField.text = nil
         tableView.reloadData()
     }
 }
@@ -121,7 +122,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.tapFor(row: indexPath.row)
+    }
 }

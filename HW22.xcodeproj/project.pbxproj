@@ -19,7 +19,6 @@
 		3ADE35082920E94200953336 /* ManagedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35072920E94200953336 /* ManagedModel.swift */; };
 		3ADE350A2920E95B00953336 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35092920E95B00953336 /* ProfileViewController.swift */; };
 		3ADE350C2920E96A00953336 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350B2920E96A00953336 /* ProfilePresenter.swift */; };
-		3ADE350E2920E97500953336 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350D2920E97500953336 /* ProfileModel.swift */; };
 		3ADE35102920F36300953336 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE350F2920F36300953336 /* MainTableViewCell.swift */; };
 		3ADE35142920F9CE00953336 /* AssemblyBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE35132920F9CE00953336 /* AssemblyBuilder.swift */; };
 		3ADE353A292284DA00953336 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE3538292284DA00953336 /* Person+CoreDataClass.swift */; };
@@ -40,7 +39,6 @@
 		3ADE35072920E94200953336 /* ManagedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedModel.swift; sourceTree = "<group>"; };
 		3ADE35092920E95B00953336 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3ADE350B2920E96A00953336 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
-		3ADE350D2920E97500953336 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		3ADE350F2920F36300953336 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		3ADE35132920F9CE00953336 /* AssemblyBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyBuilder.swift; sourceTree = "<group>"; };
 		3ADE3538292284DA00953336 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 			children = (
 				3ADE35092920E95B00953336 /* ProfileViewController.swift */,
 				3ADE350B2920E96A00953336 /* ProfilePresenter.swift */,
-				3ADE350D2920E97500953336 /* ProfileModel.swift */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -271,7 +268,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ADE350E2920E97500953336 /* ProfileModel.swift in Sources */,
 				3ADE35062920E93900953336 /* MainPresenter.swift in Sources */,
 				3ADE34ED2920DC8900953336 /* CoreData.xcdatamodeld in Sources */,
 				3ADE350C2920E96A00953336 /* ProfilePresenter.swift in Sources */,
