@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol MainViewProtocol: AnyObject {
-    
+    func reloadTable()
 }
 
 class MainViewController: UIViewController, MainViewProtocol {
@@ -57,7 +57,11 @@ class MainViewController: UIViewController, MainViewProtocol {
         setupHierarchy()
         setupLayout()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        presenter?.getPersons()
+    }
+
     // MARK: - Setup
     
     private func setupView() {
@@ -93,6 +97,10 @@ class MainViewController: UIViewController, MainViewProtocol {
         }
     }
     
+    func reloadTable() {
+        tableView.reloadData()
+    }
+    
     // MARK: - Actions
     
     @objc private func addPerson() {
@@ -119,7 +127,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         presenter?.deletePerson(at: indexPath.row)
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

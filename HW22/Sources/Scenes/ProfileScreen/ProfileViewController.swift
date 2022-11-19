@@ -42,23 +42,75 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
     private lazy var personName: UITextField = {
         let label = UITextField()
         label.isEnabled = isEditEnable
+        label.leftView = personNameImage
+        label.leftViewMode = .always
+        label.font = UIFont.systemFont(ofSize: 22)
         return label
     }()
     
     private lazy var personBirthDay: UITextField = {
         let label = UITextField()
         label.isEnabled = isEditEnable
+        label.leftView = personBirthDayImage
+        label.leftViewMode = .always
+        label.font = UIFont.systemFont(ofSize: 22)
         return label
     }()
     
     private lazy var personGender: UITextField = {
         let label = UITextField()
         label.isEnabled = isEditEnable
+        label.leftView = personGenderImage
+        label.leftViewMode = .always
+        label.font = UIFont.systemFont(ofSize: 22)
         return label
+    }()
+    
+    private lazy var personNameImage: UIImageView = {
+        let image = UIImage(systemName: "person.fill")
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private lazy var personBirthDayImage: UIImageView = {
+        let image = UIImage(systemName: "birthday.cake.fill")
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private lazy var personGenderImage: UIImageView = {
+        let image = UIImage(systemName: "figure.dress.line.vertical.figure")
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private lazy var separators: [UIView] = {
+        var views: [UIView] = []
+        for i in 1...3 {
+            var view = UIView()
+            view.backgroundColor = .separator
+            self.view.addSubview(view)
+            views.append(view)
+        }
+        return views
+    }()
+    
+    private lazy var stack: UIStackView = {
+        let stack = UIStackView()
+        stack.spacing = 10
+        stack.axis = .vertical
+        stack.alignment = .leading
+        stack.contentMode = .scaleAspectFit
+        return stack
     }()
     
     private lazy var leftBarButtonItem: UIBarButtonItem = {
         let button = UIBarButtonItem()
+        button.action = #selector(backButtonAction)
+        button.target = self
         button.image = UIImage(systemName: "arrow.left")
         return button
     }()
@@ -90,31 +142,49 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
     
     private func setupHierarchy() {
         view.addSubview(profilePhoto)
-        view.addSubview(personName)
-        view.addSubview(personBirthDay)
-        view.addSubview(personGender)
+        
+        stack.addArrangedSubview(personName)
+        stack.addArrangedSubview(separators[0])
+        stack.addArrangedSubview(personBirthDay)
+        stack.addArrangedSubview(separators[1])
+        stack.addArrangedSubview(personGender)
+        stack.addArrangedSubview(separators[2])
+        
+        view.addSubview(stack)
     }
     
     private func setupLayout() {
         profilePhoto.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.height.width.equalTo(200)
+            make.height.width.equalTo(250)
         }
         
-        personName.snp.makeConstraints { make in
-            make.top.equalTo(profilePhoto.snp.bottom).offset(20)
-            make.left.equalTo(view.snp.left).offset(20)
+        stack.snp.makeConstraints { make in
+            make.top.equalTo(profilePhoto.snp.bottom).offset(40)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
         }
         
-        personBirthDay.snp.makeConstraints { make in
-            make.top.equalTo(personName.snp.bottom).offset(20)
-            make.left.equalTo(personName)
+        separators.forEach { separator in
+            separator.snp.makeConstraints { make in
+                make.height.equalTo(1)
+                make.width.equalTo(stack)
+            }
         }
         
-        personGender.snp.makeConstraints { make in
-            make.top.equalTo(personBirthDay.snp.bottom).offset(20)
-            make.left.equalTo(personName)
+        [personName, personBirthDay, personGender].forEach { view in
+            view.snp.makeConstraints { make in
+                make.height.equalTo(40)
+                make.width.equalTo(stack.snp.width)
+            }
+        }
+        
+        [personNameImage, personBirthDayImage, personGenderImage].forEach { view in
+            view.snp.makeConstraints { make in
+                make.height.equalTo(25)
+                make.width.equalTo(60)
+            }
         }
     }
     
@@ -122,11 +192,65 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
     
     @objc private func editAction() {
         isEditEnable.toggle()
+        stack.subviews.forEach { view in
+            guard let textField = view as? UITextField else { return }
+            textField.isEnabled = isEditEnable
+            textField.borderStyle = isEditEnable ? .roundedRect : .none
+        }
+        
         if isEditEnable {
             rightButtonItem.title = "Save"
         } else {
+            presenter?.saveButtonPressed(personName.text,
+                                         personBirthDay.text,
+                                         personGender.text)
             rightButtonItem.title = "Edit"
         }
-        print(isEditEnable)
+    }
+    
+    @objc private func backButtonAction() {
+        presenter?.backToMainScreen()
     }
 }
+
+/*
+ view.addSubview(personName)
+ view.addSubview(personBirthDay)
+ view.addSubview(personGender)
+ 
+ personNameImage.snp.makeConstraints { make in
+     make.height.equalTo(25)
+     make.width.equalTo(50)
+ }
+ 
+ personBirthDayImage.snp.makeConstraints { make in
+     make.height.equalTo(25)
+     make.width.equalTo(50)
+ }
+ 
+ personGenderImage.snp.makeConstraints { make in
+     make.height.equalTo(25)
+     make.width.equalTo(50)
+ }
+ 
+separators[0].snp.makeConstraints { make in
+    make.height.equalTo(1)
+    make.left.equalTo(view).offset(20)
+    make.right.equalTo(view).offset(-20)
+    make.top.equalTo(personName.snp.bottom)
+}
+
+separators[1].snp.makeConstraints { make in
+    make.height.equalTo(1)
+    make.left.equalTo(view).offset(20)
+    make.right.equalTo(view).offset(-20)
+    make.top.equalTo(personBirthDay.snp.bottom)
+}
+
+separators[2].snp.makeConstraints { make in
+    make.height.equalTo(1)
+    make.left.equalTo(view).offset(20)
+    make.right.equalTo(view).offset(-20)
+    make.top.equalTo(personGender.snp.bottom)
+}
+*/
