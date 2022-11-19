@@ -11,8 +11,8 @@ import CoreData
 
 protocol MainPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, model: ManagedModelProtocol, router: RouterProtocol)
-    
-    func getPersons() -> [Person]
+
+    func getPersons()
     func deletePerson(at row: Int)
     
     func addPerson(name: String)
@@ -42,19 +42,19 @@ class MainPresenter: MainPresenterProtocol {
         self.view = view
         self.model = model
         self.router = router
-        
-        persons = getPersons()
     }
     
     // MARK: - Methods for Model
-    
-    func getPersons() -> [Person] {
-        model.getModels()
+
+    func getPersons() {
+        persons = model.getModels()
+        view?.reloadTable()
     }
     
     func deletePerson(at row: Int) {
         let person = persons.remove(at: row)
         model.deleteFromContext(person: person)
+        view?.reloadTable()
     }
     
     // MARK: - Methods for ViewController
@@ -62,7 +62,7 @@ class MainPresenter: MainPresenterProtocol {
     func addPerson(name: String) {
         model.managedObject.name = name
         model.saveContext()
-        persons = getPersons()
+        getPersons()
     }
     
     func numberOfElements() -> Int {

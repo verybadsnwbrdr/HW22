@@ -10,12 +10,8 @@ import Foundation
 protocol ProfilePresenterProtocol: AnyObject {
     init(view: ProfileViewProtocol, model: ManagedModelProtocol, router: RouterProtocol, person: Person)
     
-//    func getPersons() -> [Person]
-//    func deletePerson(at row: Int)
-//
-//    func addPerson(name: String)
-//    func numberOfElements() -> Int
-//    func getPerson(for row: Int) -> Person
+    func saveButtonPressed(_ name: String?, _ birthDay: String?, _ gender: String?)
+    func backToMainScreen()
 }
 
 class ProfilePresenter: ProfilePresenterProtocol {
@@ -44,30 +40,16 @@ class ProfilePresenter: ProfilePresenterProtocol {
         view.setupProfileView(for: person)
     }
     
-//    // MARK: - Methods for Model
-//
-//    func getPersons() -> [Person] {
-//        model.getModels()
-//    }
-//
-//    func deletePerson(at row: Int) {
-//        let person = persons.remove(at: row)
-//        model.deleteFromContext(person: person)
-//    }
-//
-//    // MARK: - Methods for ViewController
-//
-//    func addPerson(name: String) {
-//        model.managedObject.name = name
-//        model.saveContext()
-//        persons = getPersons()
-//    }
-//
-//    func numberOfElements() -> Int {
-//        persons.count
-//    }
-//
-//    func getPerson(for row: Int) -> Person {
-//        persons[row]
-//    }
+//     MARK: - Methods for ViewController
+    
+    func saveButtonPressed(_ name: String?, _ birthDay: String?, _ gender: String?) {
+        person.name = name
+        person.birthDay = birthDay
+        person.gender = gender
+        model.managedObject = person
+    }
+    
+    func backToMainScreen() {
+        router?.popToRoot()
+    }
 }

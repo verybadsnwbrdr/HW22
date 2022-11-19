@@ -9,14 +9,14 @@ import Foundation
 import CoreData
 
 protocol ManagedModelProtocol: AnyObject {
-    var managedObject: Person { get }
+    var managedObject: Person { get set }
     
     func saveContext()
     func getModels() -> [Person]
     func deleteFromContext(person: Person)
 }
 
-final class ManagedModel: ManagedModelProtocol {
+final class ManagedModel: ManagedModelProtocol {    
     
     // MARK: - Properties
     
@@ -31,14 +31,24 @@ final class ManagedModel: ManagedModelProtocol {
     }()
     
     private let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Person.identifier)
-    
     private lazy var context: NSManagedObjectContext = {
-        persistentContainer.viewContext
+        let context = persistentContainer.viewContext
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
     }()
     
     var managedObject: Person {
-        Person(entity: entityForName(entityName: Person.identifier),
-               insertInto: context)
+        get {
+            Person(entity: entityForName(entityName: Person.identifier),
+                   insertInto: context)
+        }
+        set {
+            let objectToUpdate = context.object(with: newValue.objectID) as? Person
+            objectToUpdate?.name = newValue.name
+            objectToUpdate?.birthDay = newValue.birthDay
+            objectToUpdate?.gender = newValue.gender
+            saveContext()
+        }
     }
     
     // MARK: - Entity
@@ -61,7 +71,7 @@ final class ManagedModel: ManagedModelProtocol {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
-    
+
     func deleteFromContext(person: Person) {
         context.delete(person)
         saveContext()
