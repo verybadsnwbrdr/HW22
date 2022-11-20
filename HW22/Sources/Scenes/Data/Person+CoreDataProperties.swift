@@ -18,9 +18,12 @@ extension Person {
     @NSManaged public var name: String?
     @NSManaged public var birthDay: String?
     @NSManaged public var gender: String?
+    @NSManaged public var imageData: Data?
 
 }
 
-extension Person : Identifiable {
+// MARK: - Identifier
 
+extension Person: Identifiable {
+    
 }

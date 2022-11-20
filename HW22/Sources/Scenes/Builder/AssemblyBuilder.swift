@@ -12,7 +12,7 @@ protocol AssemblyBuilderProtocol {
     func createProfileModule(router: RouterProtocol, person: Person) -> UIViewController
 }
 
-class AssemblyBuilder: AssemblyBuilderProtocol {
+final class AssemblyBuilder: AssemblyBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let model = ManagedModel()
         let view = MainViewController()

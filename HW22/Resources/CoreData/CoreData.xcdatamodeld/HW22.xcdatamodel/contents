@@ -3,6 +3,7 @@
     <entity name="Person" representedClassName="Person" syncable="YES">
         <attribute name="birthDay" optional="YES" attributeType="String"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
 </model>

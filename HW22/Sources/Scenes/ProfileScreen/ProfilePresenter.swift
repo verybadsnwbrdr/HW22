@@ -10,16 +10,16 @@ import Foundation
 protocol ProfilePresenterProtocol: AnyObject {
     init(view: ProfileViewProtocol, model: ManagedModelProtocol, router: RouterProtocol, person: Person)
     
-    func saveButtonPressed(_ name: String?, _ birthDay: String?, _ gender: String?)
+    func saveButtonPressed(_ name: String?, _ birthDay: String?, _ gender: String?, _ imageData: Data?)
     func backToMainScreen()
 }
 
-class ProfilePresenter: ProfilePresenterProtocol {
+final class ProfilePresenter: ProfilePresenterProtocol {
     
     // MARK: - References
     
-    weak var view: ProfileViewProtocol?
-    var router: RouterProtocol?
+    private weak var view: ProfileViewProtocol?
+    private var router: RouterProtocol?
     private var model: ManagedModelProtocol
     
     // MARK: - Properties
@@ -32,6 +32,7 @@ class ProfilePresenter: ProfilePresenterProtocol {
                   model: ManagedModelProtocol,
                   router: RouterProtocol,
                   person: Person) {
+        
         self.view = view
         self.model = model
         self.router = router
@@ -42,11 +43,19 @@ class ProfilePresenter: ProfilePresenterProtocol {
     
 //     MARK: - Methods for ViewController
     
-    func saveButtonPressed(_ name: String?, _ birthDay: String?, _ gender: String?) {
+    func saveButtonPressed(_ name: String?, _ birthDay: String?, _ gender: String?, _ imageData: Data?) {
+        guard person.name != name ||
+                person.birthDay != birthDay ||
+                person.gender != gender ||
+                person.imageData != imageData else { return }
+        
         person.name = name
         person.birthDay = birthDay
         person.gender = gender
+        person.imageData = imageData
+        
         model.managedObject = person
+        model.saveContext()
     }
     
     func backToMainScreen() {

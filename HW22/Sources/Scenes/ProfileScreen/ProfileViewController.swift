@@ -12,7 +12,7 @@ protocol ProfileViewProtocol: AnyObject {
     func setupProfileView(for person: Person)
 }
 
-class ProfileViewController: UIViewController, ProfileViewProtocol {
+final class ProfileViewController: UIViewController, ProfileViewProtocol {
     
     // MARK: - References
     
@@ -24,18 +24,38 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
         personName.text = person.name
         personBirthDay.text = person.birthDay
         personGender.text = person.gender
+        guard let imageData = person.imageData else {
+            profilePhoto.image = UIImage(systemName: profileImageCondition.rawValue)
+            return
+        }
+        profileImageCondition = .custom
+        profilePhoto.image = UIImage(data: imageData)
     }
     
     // MARK: - Properties
     
-    private var isEditEnable = false
+    private var isEditEnable = false {
+        willSet {
+            stack.subviews.forEach { view in
+                guard let textField = view as? UITextField else { return }
+                textField.isEnabled = newValue
+                textField.borderStyle = newValue ? .roundedRect : .none
+            }
+            profilePhoto.isUserInteractionEnabled = newValue
+            rightButtonItem.title = newValue ? "Save" : "Edit"
+        }
+    }
+    
+    private var profileImageCondition = ProfileImageConditions.defaultImage
     
     // MARK: - Elements
     
     private lazy var profilePhoto: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.crop.circle")
-        imageView.contentMode = .scaleAspectFit
+        let imageTapped = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        imageView.addGestureRecognizer(imageTapped)
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 125
         return imageView
     }()
     
@@ -153,6 +173,92 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
         view.addSubview(stack)
     }
     
+    // MARK: - Actions
+    
+    @objc private func editAction() {
+        isEditEnable.toggle()
+        if !isEditEnable {
+            presenter?.saveButtonPressed(
+                personName.text,
+                personBirthDay.text,
+                personGender.text,
+                convertProfileImage()
+            )
+        }
+        toggleProfileImageCondition()
+    }
+    
+    @objc private func backButtonAction() {
+        presenter?.backToMainScreen()
+    }
+    
+    @objc private func imageTapped() {
+        showChooseImageAlert()
+    }
+}
+
+// MARK: - Profile Image Condition
+
+private extension ProfileViewController {
+    enum ProfileImageConditions: String {
+        case defaultImage = "person.crop.circle"
+        case editing = "plus.circle"
+        case custom
+    }
+    
+    func convertProfileImage() -> Data? {
+        guard profileImageCondition == .custom else { return nil }
+        return profilePhoto.image?.pngData()
+    }
+    
+    func toggleProfileImageCondition() {
+        switch profileImageCondition {
+        case .defaultImage:profileImageCondition = .editing
+        case .editing: profileImageCondition = .defaultImage
+        case .custom: return
+        }
+        profilePhoto.image = UIImage(systemName: profileImageCondition.rawValue)
+    }
+}
+
+// MARK: - ChooseImageAlert
+
+private extension ProfileViewController {
+    func showChooseImageAlert() {
+        let alert = UIAlertController(title: nil, message: "Chose image", preferredStyle: .actionSheet)
+        let photoLibAction = UIAlertAction(title: "From photo", style: .default) { [unowned self] _ in
+            choseImage(sourse: .photoLibrary)
+        }
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
+        alert.addAction(photoLibAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+    }
+}
+
+// MARK: - Delegates
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private func choseImage(sourse: UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(sourse) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = sourse
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        profilePhoto.image = info[.editedImage] as? UIImage
+        profileImageCondition = .custom
+        dismiss(animated: true)
+    }
+}
+
+// MARK: - Layout
+
+extension ProfileViewController {
     private func setupLayout() {
         profilePhoto.snp.makeConstraints { make in
             make.centerX.equalTo(view)
@@ -187,70 +293,4 @@ class ProfileViewController: UIViewController, ProfileViewProtocol {
             }
         }
     }
-    
-    // MARK: - Actions
-    
-    @objc private func editAction() {
-        isEditEnable.toggle()
-        stack.subviews.forEach { view in
-            guard let textField = view as? UITextField else { return }
-            textField.isEnabled = isEditEnable
-            textField.borderStyle = isEditEnable ? .roundedRect : .none
-        }
-        
-        if isEditEnable {
-            rightButtonItem.title = "Save"
-        } else {
-            presenter?.saveButtonPressed(personName.text,
-                                         personBirthDay.text,
-                                         personGender.text)
-            rightButtonItem.title = "Edit"
-        }
-    }
-    
-    @objc private func backButtonAction() {
-        presenter?.backToMainScreen()
-    }
 }
-
-/*
- view.addSubview(personName)
- view.addSubview(personBirthDay)
- view.addSubview(personGender)
- 
- personNameImage.snp.makeConstraints { make in
-     make.height.equalTo(25)
-     make.width.equalTo(50)
- }
- 
- personBirthDayImage.snp.makeConstraints { make in
-     make.height.equalTo(25)
-     make.width.equalTo(50)
- }
- 
- personGenderImage.snp.makeConstraints { make in
-     make.height.equalTo(25)
-     make.width.equalTo(50)
- }
- 
-separators[0].snp.makeConstraints { make in
-    make.height.equalTo(1)
-    make.left.equalTo(view).offset(20)
-    make.right.equalTo(view).offset(-20)
-    make.top.equalTo(personName.snp.bottom)
-}
-
-separators[1].snp.makeConstraints { make in
-    make.height.equalTo(1)
-    make.left.equalTo(view).offset(20)
-    make.right.equalTo(view).offset(-20)
-    make.top.equalTo(personBirthDay.snp.bottom)
-}
-
-separators[2].snp.makeConstraints { make in
-    make.height.equalTo(1)
-    make.left.equalTo(view).offset(20)
-    make.right.equalTo(view).offset(-20)
-    make.top.equalTo(personGender.snp.bottom)
-}
-*/

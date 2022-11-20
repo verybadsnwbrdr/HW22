@@ -8,11 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainTableViewCell: UITableViewCell {
-    
-    // MARK: - Identifier
-    
-    static let identifier = "MainTableViewCell"
+final class MainTableViewCell: UITableViewCell {
     
     // MARK: - SetupCell
     
@@ -40,6 +36,13 @@ class MainTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - PrepareForReuse
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        label.text = nil
+    }
+    
     // MARK: - Setup
     
     private func setupHierarchy() {
@@ -53,11 +56,10 @@ class MainTableViewCell: UITableViewCell {
             make.centerY.equalTo(snp.centerY)
         }
     }
+}
+
+// MARK: - Identifier
+
+extension MainTableViewCell: Identifiable {
     
-    // MARK: - PrepareForReuse
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        label.text = nil
-    }
 }
