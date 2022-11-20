@@ -47,7 +47,7 @@ final class ManagedModel: ManagedModelProtocol {
             objectToUpdate?.name = newValue.name
             objectToUpdate?.birthDay = newValue.birthDay
             objectToUpdate?.gender = newValue.gender
-            saveContext()
+            objectToUpdate?.imageData = newValue.imageData
         }
     }
     

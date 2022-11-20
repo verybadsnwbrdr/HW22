@@ -12,7 +12,7 @@ protocol MainViewProtocol: AnyObject {
     func reloadTable()
 }
 
-class MainViewController: UIViewController, MainViewProtocol {
+final class MainViewController: UIViewController {
     
     // MARK: - Presenter Reference
     
@@ -76,6 +76,53 @@ class MainViewController: UIViewController, MainViewProtocol {
         view.addSubview(tableView)
     }
     
+    // MARK: - Actions
+    
+    @objc private func addPerson() {
+        guard let text = textField.text,
+              !text.isEmpty else { return }
+        presenter?.addPerson(name: text)
+        textField.text = nil
+    }
+}
+
+// MARK: - MainViewProtocol
+
+extension MainViewController: MainViewProtocol {
+    func reloadTable() {
+        tableView.reloadData()
+    }
+}
+
+// MARK: - Delegate and DataSource
+
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        presenter?.numberOfElements() ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        if let person = presenter?.getPerson(for: indexPath.row) {
+            cell.setupCell(with: person)
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        presenter?.deletePerson(at: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.tapFor(row: indexPath.row)
+    }
+}
+
+// MARK: - Layout
+
+extension MainViewController {
     private func setupLayout() {
         textField.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -95,43 +142,5 @@ class MainViewController: UIViewController, MainViewProtocol {
             make.left.right.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.snp.bottom)
         }
-    }
-    
-    func reloadTable() {
-        tableView.reloadData()
-    }
-    
-    // MARK: - Actions
-    
-    @objc private func addPerson() {
-        guard let text = textField.text else { return }
-        presenter?.addPerson(name: text)
-        textField.text = nil
-        tableView.reloadData()
-    }
-}
-
-extension MainViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter?.numberOfElements() ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
-        if let person = presenter?.getPerson(for: indexPath.row) {
-            cell.setupCell(with: person)
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-        presenter?.deletePerson(at: indexPath.row)
-//        tableView.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        presenter?.tapFor(row: indexPath.row)
     }
 }

@@ -7,7 +7,6 @@
 
 import Foundation
 import CoreData
-//import UIKit
 
 protocol MainPresenterProtocol: AnyObject {
     init(view: MainViewProtocol, model: ManagedModelProtocol, router: RouterProtocol)
@@ -22,17 +21,21 @@ protocol MainPresenterProtocol: AnyObject {
     func tapFor(row: Int)
 }
 
-class MainPresenter: MainPresenterProtocol {
+final class MainPresenter: MainPresenterProtocol {
     
     // MARK: - References
     
-    weak var view: MainViewProtocol?
-    var router: RouterProtocol?
+    private weak var view: MainViewProtocol?
+    private var router: RouterProtocol?
     private var model: ManagedModelProtocol
     
     // MARK: - Properties
     
-    private var persons: [Person] = []
+    private var persons: [Person] = [] {
+        didSet {
+            view?.reloadTable()
+        }
+    }
     
     // MARK: - Initializer
     
@@ -48,13 +51,11 @@ class MainPresenter: MainPresenterProtocol {
 
     func getPersons() {
         persons = model.getModels()
-        view?.reloadTable()
     }
     
     func deletePerson(at row: Int) {
         let person = persons.remove(at: row)
         model.deleteFromContext(person: person)
-        view?.reloadTable()
     }
     
     // MARK: - Methods for ViewController
