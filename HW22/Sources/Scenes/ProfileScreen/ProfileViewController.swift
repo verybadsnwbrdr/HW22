@@ -62,6 +62,7 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
     private lazy var personName: UITextField = {
         let label = UITextField()
         label.isEnabled = isEditEnable
+        label.placeholder = "Name"
         label.leftView = personNameImage
         label.leftViewMode = .always
         label.font = UIFont.systemFont(ofSize: 22)
@@ -71,6 +72,7 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
     private lazy var personBirthDay: UITextField = {
         let label = UITextField()
         label.isEnabled = isEditEnable
+        label.placeholder = "Birthday"
         label.leftView = personBirthDayImage
         label.leftViewMode = .always
         label.font = UIFont.systemFont(ofSize: 22)
@@ -80,6 +82,7 @@ final class ProfileViewController: UIViewController, ProfileViewProtocol {
     private lazy var personGender: UITextField = {
         let label = UITextField()
         label.isEnabled = isEditEnable
+        label.placeholder = "Gender"
         label.leftView = personGenderImage
         label.leftViewMode = .always
         label.font = UIFont.systemFont(ofSize: 22)

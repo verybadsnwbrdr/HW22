@@ -107,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				3AB6E055292A40DF0098D039 /* Protocol */,
+				3ADE353C292284E300953336 /* Data */,
+				3ADE35122920F9B100953336 /* Builder */,
 				3ADE35012920E0C100953336 /* Scenes */,
 				3ADE35002920E0BC00953336 /* App */,
 			);
@@ -141,8 +143,6 @@
 		3ADE35012920E0C100953336 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				3ADE353C292284E300953336 /* Data */,
-				3ADE35122920F9B100953336 /* Builder */,
 				3ADE35042920E90C00953336 /* ProfileScreen */,
 				3ADE35032920E8FE00953336 /* MainScreen */,
 			);
