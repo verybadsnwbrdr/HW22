@@ -5,11 +5,7 @@
 //  Created by Anton on 20.11.2022.
 //
 
-import Foundation
-
-protocol Identifiable {
-    static var identifier: String { get }
-}
+//import Foundation
 
 extension Identifiable {
     static var identifier: String {

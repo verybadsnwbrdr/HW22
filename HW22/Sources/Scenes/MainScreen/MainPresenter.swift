@@ -61,8 +61,7 @@ final class MainPresenter: MainPresenterProtocol {
     // MARK: - Methods for ViewController
     
     func addPerson(name: String) {
-        model.managedObject.name = name
-        model.saveContext()
+        model.addModel(with: name)
         getPersons()
     }
     

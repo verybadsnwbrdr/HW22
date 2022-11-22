@@ -9,11 +9,11 @@ import Foundation
 import CoreData
 
 protocol ManagedModelProtocol: AnyObject {
-    var managedObject: Person { get set }
-    
+    func addModel(with name: String)
     func saveContext()
     func getModels() -> [Person]
     func deleteFromContext(person: Person)
+    func updateModel(for person: Person)
 }
 
 final class ManagedModel: ManagedModelProtocol {    
@@ -22,45 +22,30 @@ final class ManagedModel: ManagedModelProtocol {
     
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CoreData")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
         return container
     }()
     
-    private let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Person.identifier)
+    private let fetchRequest = Person.fetchRequest()
     private lazy var context: NSManagedObjectContext = {
         let context = persistentContainer.viewContext
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }()
-    
-    var managedObject: Person {
-        get {
-            Person(entity: entityForName(entityName: Person.identifier),
-                   insertInto: context)
-        }
-        set {
-            let objectToUpdate = context.object(with: newValue.objectID) as? Person
-            objectToUpdate?.name = newValue.name
-            objectToUpdate?.birthDay = newValue.birthDay
-            objectToUpdate?.gender = newValue.gender
-            objectToUpdate?.imageData = newValue.imageData
-        }
-    }
-    
-    // MARK: - Entity
-    
-    private func entityForName(entityName: String) -> NSEntityDescription {
-        guard let entityDescription = NSEntityDescription.entity(
-            forEntityName: entityName,
-            in: context) else { return NSEntityDescription() }
-        return entityDescription
+    private var managedObject: Person {
+        Person(context: context)
     }
     
     // MARK: - CoreData
+    
+    func addModel(with name: String) {
+        managedObject.name = name
+        saveContext()
+    }
     
     func saveContext() {
         guard context.hasChanges else { return }
@@ -78,8 +63,17 @@ final class ManagedModel: ManagedModelProtocol {
     }
     
     func getModels() -> [Person] {
-        guard let models = try? context.fetch(fetchRequest) as? [Person] else { return [] }
+        guard let models = try? context.fetch(fetchRequest) else { return [] }
         return models
+    }
+    
+    func updateModel(for person: Person) {
+        let objectToUpdate = context.object(with: person.objectID) as? Person
+        objectToUpdate?.name = person.name
+        objectToUpdate?.birthDay = person.birthDay
+        objectToUpdate?.gender = person.gender
+        objectToUpdate?.imageData = person.imageData
+        saveContext()
     }
 }
 
