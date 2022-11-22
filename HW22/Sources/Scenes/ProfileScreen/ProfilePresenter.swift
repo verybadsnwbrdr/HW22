@@ -54,8 +54,7 @@ final class ProfilePresenter: ProfilePresenterProtocol {
         person.gender = gender
         person.imageData = imageData
         
-        model.managedObject = person
-        model.saveContext()
+        model.updateModel(for: person)
     }
     
     func backToMainScreen() {
